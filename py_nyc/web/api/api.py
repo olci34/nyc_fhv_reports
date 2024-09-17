@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from starlette import status
 import json
 from py_nyc.web.api.schemas import ListTripSchema, TripSchema
@@ -10,8 +10,8 @@ router = APIRouter()
 
 
 @router.get("/home", response_model=ListTripSchema)
-def get_trips():
-    resp = get_trip_data()
+def get_trips(page: int, perPage: int):
+    resp = get_trip_data(page, perPage)
 
     if resp.status_code == status.HTTP_200_OK:
         trip_list = json.loads(resp.content.decode("utf-8"))
