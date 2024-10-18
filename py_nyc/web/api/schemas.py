@@ -9,7 +9,16 @@ class TripSchema(BaseModel):
     trip_miles: float
     trip_time: int
     request_datetime: datetime
+    pulocationid: int
+    dolocationid: int
 
 
 class ListTripSchema(BaseModel):
     trips: list[TripSchema]
+
+
+class LocDensitySchema(BaseModel):
+    """
+    Pickup density of locations
+    """
+    density: list[tuple[int, int]]
